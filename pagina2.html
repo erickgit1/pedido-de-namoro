@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrossel Polaroide</title>
+  <style>
+    body {
+      background-color: #fcd6e5;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 40px;
+      color: #333;
+    }
+
+    .carousel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin: 60px auto 20px;
+      max-width: 1000px;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 10px 10px 30px 10px;
+      width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      position: relative;
+      transform: rotate(0deg);
+      transition: transform 0.3s ease;
+    }
+
+    .polaroid img {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    .caption {
+      margin-top: 10px;
+      font-style: italic;
+      color: #444;
+    }
+
+    .pin {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      position: absolute;
+      top: 5px;
+      left: calc(50% - 6px);
+    }
+
+    .polaroid:nth-child(1) { transform: rotate(-6deg); }
+    .polaroid:nth-child(2) { transform: rotate(0deg); }
+    .polaroid:nth-child(3) { transform: rotate(6deg); }
+
+    .pin.blue { background: #3f51b5; }
+    .pin.green { background: #4caf50; }
+    .pin.orange { background: #ff9800; }
+
+    .progress-bar {
+      width: 60%;
+      height: 6px;
+      background-color: #f1a8c4;
+      border-radius: 5px;
+      margin: 40px auto 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background-color: #ec407a;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    #next-btn {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #ec407a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>alguns momentos nossos</h1>
+
+  <div class="carousel" id="carousel"></div>
+
+  <div class="progress-bar">
+    <div class="progress" id="progress"></div>
+  </div>
+
+  <button id="next-btn">Próxima</button>
+
+  <script>
+    const groups = [
+      [
+        { src: 'imgs/3.png', caption: 'O começo de tudo.', pin: 'blue' },
+        { src: 'imgs/4.png', caption: 'Linda, até quando se apossa do meu celular.', pin: 'green' },
+        { src: 'imgs/2.png', caption: 'Uma das únicas fotos decentes que temos.', pin: 'orange' }
+      ],
+      [
+        { src: 'imgs/1.png', caption: 'Ela descobrindo que eu não sou fotogênico.', pin: 'blue' },
+        { src: 'imgs/5.png', caption: 'Descobri que o meu celular é mais seu do que meu, quase não tem foto minha.', pin: 'green' },
+      ]
+    ];
+
+    let index = 0;
+    const carousel = document.getElementById('carousel');
+    const progress = document.getElementById('progress');
+    const nextBtn = document.getElementById('next-btn');
+
+    function renderGroup() {
+      carousel.innerHTML = '';
+      groups[index].forEach((item, i) => {
+        const polaroid = document.createElement('div');
+        polaroid.className = 'polaroid';
+
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.caption;
+
+        const pin = document.createElement('div');
+        pin.className = 'pin ' + item.pin;
+
+        const caption = document.createElement('div');
+        caption.className = 'caption';
+        caption.textContent = item.caption;
+
+        polaroid.appendChild(pin);
+        polaroid.appendChild(img);
+        polaroid.appendChild(caption);
+        carousel.appendChild(polaroid);
+      });
+
+      progress.style.width = ((index + 1) / groups.length) * 100 + '%';
+    }
+
+    nextBtn.addEventListener('click', () => {
+      index++;
+      if (index >= groups.length) {
+        window.location.href = 'pagina3.html';
+      } else {
+        renderGroup();
+      }
+    });
+
+    renderGroup();
+  </script>
+</body>
+</html>

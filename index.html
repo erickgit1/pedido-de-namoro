@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Início</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fcd6e5;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    .instruction {
+      font-size: 20px;
+      font-weight: normal;
+      color: #444;
+      margin-bottom: 15px;
+    }
+
+    .label {
+      background-color: white;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .footer-text {
+      font-size: 20px;
+      font-weight: normal;
+      color: #444;
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-text .amor {
+      color: red;
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      width: 60%;
+      height: 14px;
+      background-color: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      position: absolute;
+      bottom: 40px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: #ec407a;
+      transition: width 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="instruction">Pressione a tecla</div>
+  <div class="label">espaço</div>
+  <div class="footer-text">meu <span class="amor">amor</span> ❤️</div>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+
+  <script>
+    const fill = document.getElementById('progress-fill');
+    let progress = 0;
+    const step = 5; // aumenta 5% a cada espaço pressionado
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault(); // evitar rolagem da página
+        if (progress < 100) {
+          progress += step;
+          if (progress > 100) progress = 100;
+          fill.style.width = progress + '%';
+        }
+
+        if (progress >= 100) {
+          setTimeout(() => {
+            window.location.href = 'pagina2.html';
+          }, 300);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

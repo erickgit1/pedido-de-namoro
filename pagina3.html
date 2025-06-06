@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Pedido de Namoro</title>
+  <style>
+    body {
+      font-family: 'Great Vibes', cursive;
+      background-color: #f9d5e5;
+      text-align: center;
+      margin-top: 100px;
+    }
+    h1 {
+      font-size: 48px;
+      color: #333;
+      animation: flutuar 2s ease-in-out infinite;
+    }
+    @keyframes flutuar {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    .opcoes {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    button {
+      font-size: 24px;
+      padding: 12px 24px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #fff;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    button:hover {
+      background-color: #ffe0ec;
+    }
+    #nao {
+      position: relative;
+    }
+    .ou {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      font-family: 'Great Vibes', cursive;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Aceita namorar comigo?</h1>
+  <div class="opcoes">
+    <button onclick="window.location.href='resposta.html'">Sim</button>
+    <span class="ou">ou</span>
+    <button id="nao">Não</button>
+  </div>
+
+  <script>
+    const btnNao = document.getElementById('nao');
+
+    btnNao.addEventListener('mousemove', () => {
+      btnNao.textContent = 'Sim';
+    });
+
+    btnNao.addEventListener('mouseleave', () => {
+      btnNao.textContent = 'Não';
+    });
+  </script>
+</body>
+</html>
